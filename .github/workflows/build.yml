@@ -23,3 +23,8 @@ jobs:
       run: sh build-all.sh
     - name: archive
       run: cd bin; tar zcvf ../wg-alive.tar.gz *
+    - name: Upload artefact
+      uses: actions/upload-artifact@v2.2.1
+      with:
+        name: wg-alive.tar.gz
+        path: wg-alive.tar.gz
