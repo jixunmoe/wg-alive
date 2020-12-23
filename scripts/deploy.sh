@@ -25,7 +25,7 @@ wg0     10.0.0.1
 EOF
 fi
 
-cat > /etc/system/systemd/wg-alive.service <<'EOF'
+cat > /etc/systemd/system/wg-alive.service <<'EOF'
 [Unit]
 Description=WireGuard Keep-alive tool
 After=network-online.target
