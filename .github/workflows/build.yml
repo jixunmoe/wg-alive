@@ -2,7 +2,7 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ '*' ]
+    branches: [ 'default' ]
   pull_request:
     branches: [ '*' ]
 
@@ -14,10 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: setup dependency
-      run: sudo apt-get update && sudo apt-get install -y \
-        build-essential \
-        gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi \
-        gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
+      run: >
+        sudo apt-get update && sudo apt-get install -y
+          build-essential
+          gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
+          gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
     - name: build
       run: sh build-all.sh
     - name: archive
