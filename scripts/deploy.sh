@@ -32,7 +32,6 @@ After=network-online.target
 
 [Service]
 Type=simple
-DynamicUser=true
 ExecStart=/opt/wg-alive/wg-alive /etc/wg-alive.conf
 
 [Install]
