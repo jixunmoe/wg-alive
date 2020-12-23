@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: setup dependency
-      run: apt-get update && apt-get install -y \
+      run: sudo apt-get update && sudo apt-get install -y \
         build-essential \
         gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi \
         gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
