@@ -1,9 +1,24 @@
-mkdir -p bin
+#!/bin/sh
 
-make clean
-CC=gcc make all
-mv wg-alive bin/wg-alive.amd64
+set -ex
 
-make clean
-CC=arm-linux-gnueabi-gcc make all
-mv wg-alive bin/wg-alive.armhf
+rm -rf bin
+
+mkdir -p bin obj
+
+# build <arch> <cc>
+build()
+{
+  export ARCH="$1"
+  export CC="$2"
+
+  command -v "$CC" || return
+
+  make clean
+  make all
+  cp "wg-alive" "bin/wg-alive.$1"
+}
+
+build "$(uname -m)" gcc
+build "arm" arm-linux-gnueabi-gcc
+build "aarch64" aarch64-linux-gnu-gcc
