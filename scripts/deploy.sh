@@ -3,15 +3,16 @@
 set -ex
 
 mkdir -p /opt/wg-alive
-cd /opt/wg-alive
 
 no_binary() {
   echo "Your system is not supported. Please compile it."
   exit 1
 }
 
-wget --compression=auto "https://somewhere/wg-alive/wg-alive.$(uname -m)" -Owg-alive || no_binary
-chmod a+x wg-alive
+VER=$(wget -q -O- https://api.github.com/repos/jixunmoe/wg-alive/releases/latest | jq -r '.tag_name')
+URL="https://github.com/jixunmoe/wg-alive/releases/download/${VER}/wg-alive.$(uname -m)"
+wget --compression=auto "$URL" -O /opt/wg-alive/wg-alive || no_binary
+chmod a+x /opt/wg-alive/wg-alive
 
 if [ ! -f "/etc/wg-alive.conf" ]; then
   cat > /etc/wg-alive.conf <<'EOF'
@@ -40,3 +41,5 @@ EOF
 
 systemctl daemon-reload
 systemctl enable wg-alive
+
+editor /etc/wg-alive.conf
