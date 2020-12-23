@@ -4,8 +4,8 @@
 
 # Compiler settings - Can be customized.
 CC ?= gcc
-CFLAGS ?= -std=c11 -Wall -D_POSIX_C_SOURCE=200809L
-LDFLAGS ?= -static -lm
+CFLAGS ?= -std=c11 -O2 -Wall -D_POSIX_C_SOURCE=200809L
+LDFLAGS ?= -static -lm -s
 
 # Makefile settings - Can be customized.
 APPNAME = wg-alive
