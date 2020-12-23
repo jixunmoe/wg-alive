@@ -1,0 +1,24 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: setup dependency
+      run: apt-get update && apt-get install -y \
+        build-essential \
+        gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi \
+        gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
+    - name: build
+      run: sh build-all.sh
+    - name: archive
+      run: cd bin; tar zcvf ../wg-alive.tar.gz *
