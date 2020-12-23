@@ -44,9 +44,9 @@ void push_config(struct WireGuardConfigs *root, const char *iface, int n_iface, 
   }
   struct WireGuardInfo *p = &root->p[root->count++];
   strncpy(p->iface, iface, MIN(n_iface, sizeof_iface));
-  p->iface[sizeof_iface] = '\x00';
+  p->iface[sizeof_iface - 1] = '\x00';
   strncpy(p->gateway, gateway, MIN(n_gateway, sizeof_gateway));
-  p->gateway[sizeof_gateway] = '\x00';
+  p->gateway[sizeof_gateway - 1] = '\x00';
 }
 
 struct WireGuardConfigs *parse_config(const char *path)
